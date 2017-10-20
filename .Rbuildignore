@@ -1,0 +1,8 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^README\.Rmd$
+^README_files$
+^README_images$
+^.github/
+^docs/
+^man-roxygen/
