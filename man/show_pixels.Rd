@@ -4,10 +4,14 @@
 \alias{show_pixels}
 \title{Show Pixels Widget}
 \usage{
-show_pixels(grid = c(28, 28), size = c(500, 500), brush = matrix(c(0, 1,
-  1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0), 5, 5))
+show_pixels(pixels = NULL, grid = c(28, 28), size = c(500, 500),
+  brush = matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  0, 1, 1, 1, 0), 5, 5))
 }
 \arguments{
+\item{pixels}{The pixels to render as a 1-dimensional vector, row-first
+order expected.}
+
 \item{grid}{The grid dimensions specified as a vector.}
 
 \item{size}{The canvas dimensions specified as a vector.}

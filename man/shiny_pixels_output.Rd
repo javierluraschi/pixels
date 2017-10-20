@@ -10,6 +10,8 @@ shiny_pixels_output(outputId, width = "100\%", height = "400px")
 \item{outputId}{The identifier for this widget.}
 
 \item{width}{The width for this widget.}
+
+\item{height}{The height for this widget.}
 }
 \description{
 Provides a Shiny Widget for Output.

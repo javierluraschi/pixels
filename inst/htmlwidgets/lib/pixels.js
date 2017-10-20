@@ -1,4 +1,4 @@
-function Pixels(gridX, gridY, width, height, brush) {
+function Pixels(baseline, gridX, gridY, width, height, brush) {
   var canvas = document.createElement("canvas");
 
   canvas.width = width;
@@ -26,9 +26,19 @@ function Pixels(gridX, gridY, width, height, brush) {
     }
     return a;
   };
-
+  
   var pixels = initArray(gridY, gridX);
-
+  
+  var copyFrom1D = function(from) {
+    for (var r = 0; r < gridY; r++) {
+      for (var c = 0; c < gridX; c++) {
+        pixels[r][c] = from[r * gridX + c];
+      }
+    }
+  };
+  
+  if (baseline) copyFrom1D(baseline);
+  
   var drawGrid = function() {
     context.strokeStyle = "#DDD";
     context.lineWidth = 1;

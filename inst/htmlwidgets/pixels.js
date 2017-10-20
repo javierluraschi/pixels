@@ -4,7 +4,7 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
     return {
       renderValue: function(x) {
-        var pixels = new Pixels(x.gridX, x.gridY, x.width, x.height, x.brush);
+        var pixels = new Pixels(x.pixels, x.gridX, x.gridY, x.width, x.height, x.brush);
         
         pixels.onChange(function(pixels) {
           if (typeof("Shiny") !== "undefined") {

@@ -10,6 +10,8 @@ shiny_render_pixels(expr, env = parent.frame(), quoted = FALSE)
 \item{expr}{The \code{expr} for \code{shinyRenderWidget}.}
 
 \item{env}{The \code{env} for \code{shinyRenderWidget}.}
+
+\item{quoted}{The \code{quoted} for \code{shinyRenderWidget}.}
 }
 \description{
 Renders the Shiny Widget.
