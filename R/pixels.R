@@ -7,6 +7,7 @@
 #' @param grid The grid dimensions specified as a \code{c(width, height)} vector.
 #' @param size The canvas dimensions specified as a \code{c(width, height)} vector.
 #' @param brush The brush specified as a matrix.
+#' @param params A set of parameters to customize the visual appearance.
 #' 
 #' @import htmlwidgets
 #' @export
@@ -15,12 +16,16 @@ show_pixels <- function(
   grid = c(28, 28),
   size = c(500, 500),
   brush = matrix(c(
-    0,1,1,1,0,
-    1,1,1,1,1,
-    1,1,1,1,1,
-    1,1,1,1,1,
-    0,1,1,1,0
-  ), 5, 5)) {
+    0.0,0.5,0.8,0.5,0.0,
+    0.5,1.0,1.0,1.0,0.5,
+    0.8,1.0,1.0,1.0,0.8,
+    0.5,1.0,1.0,1.0,0.5,
+    0.0,0.5,0.8,0.5,0.0
+  ), 5, 5),
+  params = list(
+    fill = list(color = "#555555"),
+    grid = list(color = "#EEEEEE")
+  )) {
   
   x <- list(
     pixels = pixels,
@@ -28,7 +33,8 @@ show_pixels <- function(
     gridY = grid[[2]],
     width = size[[1]],
     height = size[[2]],
-    brush = brush
+    brush = brush,
+    params = params
   )
 
   htmlwidgets::createWidget("pixels", x, width = size[[1]], height = size[[2]])
@@ -64,23 +70,31 @@ shiny_render_pixels <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' 
 #' Creates an ShinyGadget to retrieve pixels as a vector.
 #' 
+#' @param pixels The pixels to render as a 1-dimensional vector, row-first
+#'   order expected.
 #' @param grid The grid dimensions specified as a vector.
 #' @param size The canvas dimensions specified as a vector.
 #' @param brush The brush specified as a matrix.
+#' @param params A set of parameters to customize the visual appearance.
 #' 
 #' @import shiny
 #' @import miniUI
 #' @export
 get_pixels <- function(
+  pixels = NULL,
   grid = c(28, 28),
   size = c(500, 500),
   brush = matrix(c(
-    0,1,1,1,0,
-    1,1,1,1,1,
-    1,1,1,1,1,
-    1,1,1,1,1,
-    0,1,1,1,0
-  ), 5, 5)) {
+    0.0,0.5,0.8,0.5,0.0,
+    0.5,1.0,1.0,1.0,0.5,
+    0.8,1.0,1.0,1.0,0.8,
+    0.5,1.0,1.0,1.0,0.5,
+    0.0,0.5,0.8,0.5,0.0
+  ), 5, 5),
+  params = list(
+    fill = list(color = "#555555"),
+    grid = list(color = "#EEEEEE")
+  )) {
   
   ui <- miniPage(
     gadgetTitleBar("Pixels"),
@@ -91,7 +105,7 @@ get_pixels <- function(
   
   server <- function(input, output, session) {
     output$pixels <- shiny_render_pixels(
-      show_pixels(grid, size, brush)
+      show_pixels(pixels, grid, size, brush, params)
     )
     
     observeEvent(input$done, {

@@ -1,4 +1,4 @@
-function Pixels(baseline, gridX, gridY, width, height, brush) {
+function Pixels(baseline, gridX, gridY, width, height, brush, params) {
   var canvas = document.createElement("canvas");
 
   canvas.width = width;
@@ -7,8 +7,18 @@ function Pixels(baseline, gridX, gridY, width, height, brush) {
   canvas.style.height = Math.floor(height / 2) + "px";
 
   context = canvas.getContext("2d");
-
-  context.fillStyle = "#555";
+  
+  var defaultParams = function(p) {
+    if (!p) p = {};
+    if (!p.fill) p.fill = {};
+    if (!p.fill.color) p.fill.color = "#555555";
+    if (!p.grid) p.grid = {};
+    if (!p.grid.color) p.grid.color = "#EEEEEE";
+    
+    return p;
+  };
+  
+  params = defaultParams(params);
 
   var deltaX = (width - 2) / gridX;
   var deltaY = (height - 2) / gridY;
@@ -21,7 +31,7 @@ function Pixels(baseline, gridX, gridY, width, height, brush) {
     for (var r = 0; r < rows; r++) {
       a[r] = [];
       for (var c = 0; c < cols; c++) {
-        a[r][c] = false;
+        a[r][c] = 0.0;
       }
     }
     return a;
@@ -32,7 +42,7 @@ function Pixels(baseline, gridX, gridY, width, height, brush) {
   var copyFrom1D = function(from) {
     for (var r = 0; r < gridY; r++) {
       for (var c = 0; c < gridX; c++) {
-        pixels[r][c] = from[r * gridX + c];
+        pixels[r][c] = Math.max(0.0, Math.min(1.0, from[r * gridX + c]));
       }
     }
   };
@@ -40,7 +50,7 @@ function Pixels(baseline, gridX, gridY, width, height, brush) {
   if (baseline) copyFrom1D(baseline);
   
   var drawGrid = function() {
-    context.strokeStyle = "#DDD";
+    context.strokeStyle = params.grid.color;
     context.lineWidth = 1;
 
     for (var posX = 1; posX < width; posX += deltaX) {
@@ -55,14 +65,31 @@ function Pixels(baseline, gridX, gridY, width, height, brush) {
 
     context.stroke();
   };
+  
+  var hexToRgb = function(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+  };
+  
+  var buildRGBA = function(rgb, alpha) {
+    return "rgba(" + rgb.r + ", " + rgb.g + "," + rgb.b + "," + alpha + ")";
+  };
 
   var redrawCanvas = function() {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     drawGrid();
 
+    var rgbFill = hexToRgb(params.fill.color);
     for (var r = 0; r < gridY; r++)
       for (var c = 0; c < gridX; c++)
-        if(pixels[r][c]) context.fillRect(1 + deltaX * c, 1 + deltaY * r, deltaX, deltaY);
+        if(pixels[r][c]) {
+          context.fillStyle = buildRGBA(rgbFill, pixels[r][c]);
+          context.fillRect(1 + deltaX * c, 1 + deltaY * r, deltaX, deltaY);
+        }
   };
 
   var setPixelFromMouse = function(e, left, top) {
@@ -78,15 +105,10 @@ function Pixels(baseline, gridX, gridY, width, height, brush) {
         var c = pixelX - offsetX + bc;
         
         if (r >= 0 && r < gridX && c >= 0 && c < gridY && brush[br][bc]) {
-          pixels[r][c] = true;
+          pixels[r][c] += brush[br][bc];
         }
       }
     }
-    
-    pixels[Math.min(pixelY + 1, gridY - 1)][pixelX] = true;
-    pixels[Math.max(0, pixelY - 1)][pixelX] = true;
-    pixels[pixelY][Math.min(pixelX + 1, gridX - 1)] = true;
-    pixels[pixelY][Math.max(0, pixelX - 1)] = true;
   };
 
   var canvasMouseDown = function(e) {
