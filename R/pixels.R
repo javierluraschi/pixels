@@ -9,6 +9,16 @@
 #' @param brush The brush specified as a matrix.
 #' @param params A set of parameters to customize the visual appearance.
 #' 
+#' @examples 
+#' 
+#' library(pixels)
+#' show_pixels(
+#'   round(runif(400, 0, 1)),
+#'   grid = c(40, 10),
+#'   size = c(800, 200),
+#'   params = list(fill = list(color = "#FF3388"))
+#' )
+#' 
 #' @import htmlwidgets
 #' @export
 show_pixels <- function(
@@ -26,6 +36,14 @@ show_pixels <- function(
     fill = list(color = "#555555"),
     grid = list(color = "#EEEEEE")
   )) {
+  
+  if (length(grid) != 2) stop("Parameter 'grid' must have only two entries.")
+  if (length(size) != 2) stop("Parameter 'size' must have only two entries.")
+  
+  if (!is.null(pixels) && grid[[1]] * grid[[2]] != length(pixels))
+    stop(
+      "Parameter 'grid' of ", grid[[1]], "x", grid[[2]], " ",
+      "length must match the 'pixels' length of ", length(pixels), ".")
   
   x <- list(
     pixels = pixels,

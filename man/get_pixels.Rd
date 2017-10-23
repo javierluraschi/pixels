@@ -4,15 +4,22 @@
 \alias{get_pixels}
 \title{Gets Pixels using a Shiny Gadget}
 \usage{
-get_pixels(grid = c(28, 28), size = c(500, 500), brush = matrix(c(0, 1, 1,
-  1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0), 5, 5))
+get_pixels(pixels = NULL, grid = c(28, 28), size = c(500, 500),
+  brush = matrix(c(0, 0.5, 0.8, 0.5, 0, 0.5, 1, 1, 1, 0.5, 0.8, 1, 1, 1, 0.8,
+  0.5, 1, 1, 1, 0.5, 0, 0.5, 0.8, 0.5, 0), 5, 5), params = list(fill =
+  list(color = "#555555"), grid = list(color = "#EEEEEE")))
 }
 \arguments{
+\item{pixels}{The pixels to render as a 1-dimensional vector, row-first
+order expected.}
+
 \item{grid}{The grid dimensions specified as a vector.}
 
 \item{size}{The canvas dimensions specified as a vector.}
 
 \item{brush}{The brush specified as a matrix.}
+
+\item{params}{A set of parameters to customize the visual appearance.}
 }
 \description{
 Creates an ShinyGadget to retrieve pixels as a vector.
