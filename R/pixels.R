@@ -1,6 +1,6 @@
-#' Show Pixels Widget
+#' Show Pixels
 #' 
-#' Creates an HTMLWidget to interact with pixels.
+#' Creates an HTMLWidget to show pixels.
 #' 
 #' @param pixels The pixels to render as a 1-dimensional vector, row-first
 #'   order expected.
@@ -66,6 +66,7 @@ show_pixels <- function(
 #' @param width The width for this widget.
 #' @param height The height for this widget.
 #' 
+#' @export
 shiny_pixels_output <- function(outputId, width = "100%", height = "400px") {
   shinyWidgetOutput(outputId, "pixels", width, height, package = "pixels")
 }
@@ -84,9 +85,9 @@ shiny_render_pixels <- function(expr, env = parent.frame(), quoted = FALSE) {
   shinyRenderWidget(expr, shiny_pixels_output, env, quoted = TRUE)
 }
 
-#' Gets Pixels using a Shiny Gadget
+#' Gets Pixels
 #' 
-#' Creates an ShinyGadget to retrieve pixels as a vector.
+#' Creates an ShinyGadget to retrieve pixels.
 #' 
 #' @param pixels The pixels to render as a 1-dimensional vector, row-first
 #'   order expected.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixels.R
 \name{show_pixels}
 \alias{show_pixels}
-\title{Show Pixels Widget}
+\title{Show Pixels}
 \usage{
 show_pixels(pixels = NULL, grid = c(28, 28), size = c(500, 500),
   brush = matrix(c(0, 0.5, 0.8, 0.5, 0, 0.5, 1, 1, 1, 0.5, 0.8, 1, 1, 1, 0.8,
@@ -22,7 +22,7 @@ order expected.}
 \item{params}{A set of parameters to customize the visual appearance.}
 }
 \description{
-Creates an HTMLWidget to interact with pixels.
+Creates an HTMLWidget to show pixels.
 }
 \examples{
 

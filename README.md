@@ -1,9 +1,9 @@
-Tools for working with Pixels in R
+Tools for Working with Pixels in R
 ================
 
-This package provides an `htmlwidget` and `shinywidget` to render and draw pixels with ease.
+This package provides an [htmlwidget](http://www.htmlwidgets.org/) and [Shiny Gadget](https://shiny.rstudio.com/articles/gadgets.html) to render and draw pixels with ease.
 
-To draw pixels run `get_pixels()` which will start a [Shiny Gadget](https://shiny.rstudio.com/articles/gadgets.html) to retrieve an array of numeric values representing each pixel in the image:
+To draw pixels run `get_pixels()` which will start the gadget to retrieve an array of numeric values representing each pixel in the image:
 
 ``` r
 library(pixels)

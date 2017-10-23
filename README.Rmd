@@ -1,5 +1,5 @@
 ---
-title: "Tools for working with Pixels in R"
+title: "Tools for Working with Pixels in R"
 output:
   github_document:
     fig_width: 9

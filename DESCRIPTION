@@ -1,13 +1,14 @@
 Package: pixels
 Type: Package
-Title: Tools for working with Pixels in R
+Title: Tools for Working with Pixels in R
 Version: 0.1.0
 Authors@R: c(
     person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut", "cre")),
     person(family = "RStudio", role = c("cph"))
     )
 Maintainer: Javier Luraschi <javier@rstudio.com>
-Description: Provides tools to show and collect pixels in R.
+Description: Provides tools to show and collect pixels using HTML widgets and
+  Shiny applications.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
