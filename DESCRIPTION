@@ -1,15 +1,18 @@
 Package: pixels
 Type: Package
-Title: Tools for Working with Pixels in R
+Title: Tools for Working with Image Pixels
 Version: 0.1.0
 Authors@R: c(
     person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut", "cre")),
     person(family = "RStudio", role = c("cph"))
     )
 Maintainer: Javier Luraschi <javier@rstudio.com>
-Description: Provides tools to show and collect pixels using HTML widgets and
-  Shiny applications.
+Description: Provides tools to show and draw image pixels using HTML widgets 
+  and 'Shiny' applications.  It can be used to visualize the 'MNIST' dataset
+  for handwritten digit recognition or to create new image recognition datasets.
 License: MIT + file LICENSE
+URL: https://github.com/javierluraschi/pixels
+BugReports: https://github.com/javierluraschi/pixels/issues
 Encoding: UTF-8
 LazyData: true
 Depends:
