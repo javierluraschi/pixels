@@ -31,6 +31,14 @@ Finally, one can use 'shiny\_render\_pixels()' with a 'Shiny' application to hel
 library(shiny)
 
 ui <- fluidPage(
+  tags$head(
+    tags$style(HTML("
+      #pixels {
+        height: 270px !important;
+        margin-top: 10px;
+      }
+    "))
+  ),
   titlePanel("Digit Capture Application"),
   textOutput("prompt"),
   shiny_pixels_output("pixels"),
@@ -59,3 +67,5 @@ server <- function(input, output) {
 
 shinyApp(ui = ui, server = server)
 ```
+
+<img src="tools/readme/shiny_app.png" width=450 />

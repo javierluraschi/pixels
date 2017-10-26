@@ -24,7 +24,7 @@
 show_pixels <- function(
   pixels = NULL,
   grid = c(28, 28),
-  size = c(500, 500),
+  size = c(250, 250),
   brush = matrix(c(
     0.0,0.5,0.8,0.5,0.0,
     0.5,1.0,1.0,1.0,0.5,
@@ -114,7 +114,7 @@ shiny_render_pixels <- function(expr, env = parent.frame(), quoted = FALSE) {
 get_pixels <- function(
   pixels = NULL,
   grid = c(28, 28),
-  size = c(500, 500),
+  size = c(250, 250),
   brush = matrix(c(
     0.0,0.5,0.8,0.5,0.0,
     0.5,1.0,1.0,1.0,0.5,

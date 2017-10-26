@@ -29,15 +29,15 @@ function Pixels() {
   this.init = function(baseline, pGridX, pGridY, pWidth, pHeight, pBrush, pParams) {
     gridX = pGridX;
     gridY = pGridY;
-    width = pWidth;
-    height = pHeight;
+    width = pWidth * 2;
+    height = pHeight * 2;
     brush = pBrush;
     params = pParams;
     
     canvas.width = width;
     canvas.height = height;
-    canvas.style.width = Math.floor(width / 2) + "px";
-    canvas.style.height = Math.floor(height / 2) + "px";
+    canvas.style.width = pWidth + "px";
+    canvas.style.height = pHeight + "px";
     
     params = defaultParams(params);
     
