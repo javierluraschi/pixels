@@ -7,7 +7,7 @@ Authors@R: c(
     person(family = "RStudio", role = c("cph"))
     )
 Maintainer: Javier Luraschi <javier@rstudio.com>
-Description: Provides tools to show and draw image pixels using HTML widgets 
+Description: Provides tools to show and draw image pixels using 'HTML' widgets 
   and 'Shiny' applications.  It can be used to visualize the 'MNIST' dataset
   for handwritten digit recognition or to create new image recognition datasets.
 License: MIT + file LICENSE
