@@ -55,7 +55,12 @@ show_pixels <- function(
     params = params
   )
 
-  htmlwidgets::createWidget("pixels", x, width = size[[1]], height = size[[2]])
+  htmlwidgets::createWidget(
+    "pixels",
+    x,
+    width = size[[1]],
+    height = size[[2]]
+  )
 }
 
 #' Shiny Widget Output
@@ -95,6 +100,13 @@ shiny_render_pixels <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' @param size The canvas dimensions specified as a vector.
 #' @param brush The brush specified as a matrix.
 #' @param params A set of parameters to customize the visual appearance.
+#' 
+#' #' @examples 
+#' 
+#' library(pixels)
+#' if (interactive()) {
+#'   get_pixels()
+#' }
 #' 
 #' @import shiny
 #' @import miniUI

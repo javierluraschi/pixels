@@ -1,12 +1,20 @@
-function Pixels(baseline, gridX, gridY, width, height, brush, params) {
+function Pixels() {
   var canvas = document.createElement("canvas");
-
-  canvas.width = width;
-  canvas.height = height;
-  canvas.style.width = Math.floor(width / 2) + "px";
-  canvas.style.height = Math.floor(height / 2) + "px";
-
   context = canvas.getContext("2d");
+  
+  var params;
+  var deltaX;
+  var deltaY;
+  var gridX;
+  var gridY;
+  var width;
+  var height;
+  var brush;
+  
+  var mouseIsDown = false;
+  var onChangeCallback;
+  
+  var pixels;
   
   var defaultParams = function(p) {
     if (!p) p = {};
@@ -18,13 +26,28 @@ function Pixels(baseline, gridX, gridY, width, height, brush, params) {
     return p;
   };
   
-  params = defaultParams(params);
-
-  var deltaX = (width - 2) / gridX;
-  var deltaY = (height - 2) / gridY;
-
-  var mouseIsDown = false;
-  var onChangeCallback;
+  this.init = function(baseline, pGridX, pGridY, pWidth, pHeight, pBrush, pParams) {
+    gridX = pGridX;
+    gridY = pGridY;
+    width = pWidth;
+    height = pHeight;
+    brush = pBrush;
+    params = pParams;
+    
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style.width = Math.floor(width / 2) + "px";
+    canvas.style.height = Math.floor(height / 2) + "px";
+    
+    params = defaultParams(params);
+    
+    deltaX = (width - 2) / gridX;
+    deltaY = (height - 2) / gridY;
+    
+    pixels = initArray(gridY, gridX);
+    
+    if (baseline) copyFrom1D(baseline);
+  };
 
   var initArray = function(rows, cols) {
     var a = [];
@@ -37,8 +60,6 @@ function Pixels(baseline, gridX, gridY, width, height, brush, params) {
     return a;
   };
   
-  var pixels = initArray(gridY, gridX);
-  
   var copyFrom1D = function(from) {
     for (var r = 0; r < gridY; r++) {
       for (var c = 0; c < gridX; c++) {
@@ -46,8 +67,6 @@ function Pixels(baseline, gridX, gridY, width, height, brush, params) {
       }
     }
   };
-  
-  if (baseline) copyFrom1D(baseline);
   
   var drawGrid = function() {
     context.strokeStyle = params.grid.color;
@@ -80,6 +99,8 @@ function Pixels(baseline, gridX, gridY, width, height, brush, params) {
   };
 
   var redrawCanvas = function() {
+    if (!width || !height) return;
+    
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     drawGrid();
 

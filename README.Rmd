@@ -32,3 +32,40 @@ show_pixels(
 ```
 
 <img src="tools/readme/show_pixels.png" width=364 />
+
+Finally, one can use 'shiny_render_pixels()' with a 'Shiny' application to help
+collect image datasets. For instance, to collect images similar to the MNIST
+dataset as follows:
+
+```{r eval=FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Digit Capture Application"),
+  textOutput("prompt"),
+  shiny_pixels_output("pixels"),
+  actionButton("captureDigit", "Capture")
+)
+
+server <- function(input, output) {
+  output$pixels <- shiny_render_pixels(
+    show_pixels()
+  )
+  
+  digit <- reactiveVal(floor(runif(1, 1, 10)))
+  output$prompt <- renderText(paste0("Please draw number ", digit(), ":"))
+  
+  observeEvent(input$captureDigit, {
+    digit_path <- file.path("digits", digit())
+    if (!dir.exists(digit_path)) dir.create(digit_path, recursive = TRUE)
+    saveRDS(input$pixels, paste0(digit_path, "/", as.numeric(Sys.time()), ".rds"))
+    
+    digit(floor(runif(1, 1, 10)))
+    output$pixels <- shiny_render_pixels(
+      show_pixels()
+    )
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
