@@ -1,6 +1,8 @@
 Tools for Working with Pixels in R
 ================
 
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/pixels)](https://cran.r-project.org/package=pixels)
+
 This package provides an [htmlwidget](http://www.htmlwidgets.org/) and [Shiny Gadget](https://shiny.rstudio.com/articles/gadgets.html) to render and draw pixels with ease.
 
 To draw pixels run `get_pixels()` which will start the gadget to retrieve an array of numeric values representing each pixel in the image:

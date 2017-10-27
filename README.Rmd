@@ -6,6 +6,8 @@ output:
     fig_height: 5
 ---
 
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/pixels)](https://cran.r-project.org/package=pixels)
+
 This package provides an [htmlwidget](http://www.htmlwidgets.org/) and [Shiny Gadget](https://shiny.rstudio.com/articles/gadgets.html) to render and draw
 pixels with ease.
 
