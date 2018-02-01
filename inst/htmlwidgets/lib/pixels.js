@@ -126,7 +126,7 @@ function Pixels() {
         var c = pixelX - offsetX + bc;
         
         if (r >= 0 && r < gridX && c >= 0 && c < gridY && brush[br][bc]) {
-          pixels[r][c] += brush[br][bc];
+          pixels[r][c] = Math.min(1.0, pixels[r][c] + brush[br][bc]);
         }
       }
     }
